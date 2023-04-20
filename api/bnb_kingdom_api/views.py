@@ -2,9 +2,21 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .import models
 import json
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+from .models import *
+from .serializers import *
 
 # Create your views here.
+@api_view(['GET', 'POST'])
+def list(request):
+    if request.method == 'GET':
+        data = List.objects.all()
 
+        serializer = ListSerializer(data, context={'request': request}, many=True)
+
+        return Response(serializer.data)
 
 @csrf_exempt
 def index(req):
@@ -139,7 +151,7 @@ def save_buy_history(req):
             "error_type": "user_not_found"
         }, status=404)
 
-    buy_history = models.BuyHistory(
+    buy_history = BuyHistory(
         user=user,
         amount_bnb=amount_bnb
     )
@@ -158,7 +170,7 @@ def get_buy_history(req, wallet_address):
         }, status=405)
 
     try:
-        history = models.BuyHistory.objects.filter(
+        history = BuyHistory.objects.filter(
             user__wallet_address=wallet_address)
     except models.BuyHistory.DoesNotExist:
         return JsonResponse({

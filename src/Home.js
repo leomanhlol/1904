@@ -7,6 +7,8 @@ import classNames from "classnames";
 import "./Home.css";
 import "./Theme.css";
 import Team from "./Team";
+import Register from "./Register.js";
+import List from "./List.js";
 import axios from "axios";
 
 function Home() {
@@ -238,7 +240,7 @@ function Home() {
     }
     axios({
       method: "GET",
-      url: "http://api.bnbkingdom.io/api/get_buy_history/" + address,
+      url: "http://127.0.0.1:8000/api/get_buy_history/" + address,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
@@ -1350,12 +1352,13 @@ function Home() {
                     </div>
                   </div> */}
               </div>
-
-              <div className="col-lg-7 col-md-6 mb-lg-0 mb-4">
+                  <Register />
+              {/* <div className="col-lg-7 col-md-6 mb-lg-0 mb-4">
                 <div className="card bg-gradient-dark">
                   <div className="card-body p-3">
                     <div className="row">
                       <div className="col-lg-12">
+                        <form>
                         <div className="d-flex flex-column h-100">
                           <h2
                             className="col-lg 5 font-weight-bolder mb-4"
@@ -1378,7 +1381,7 @@ function Home() {
                               onfocusout="defocused(this)"
                             />
                           </div>
-
+                          <select class="input-bordered-presale"><option value="">-- PLEASE CHOOSE PACKAGE --</option><option class="option" value="90 DAYS">Package 1: GOLD</option><option class="option" value="150 DAYS">Package 2: RUBY</option><option class="option" value="180 DAYS">Package 3: PLATINUM</option><option class="option" value="240 DAYS">Package 4: SAPPHIRE</option><option class="option" value="300 DAYS">Package 5: DIAMOND</option><option class="option" value="360 DAYS">Package 6: DOUBLE DIAMOND</option></select>
                           <div className="view-buy other_btn">
                             <center>
                               <a
@@ -1389,6 +1392,7 @@ function Home() {
                               >
                                 BUY AND INVEST
                               </a>
+                              <input type="submit" className="btn btn-info btn-auto btn-md" value="BUY AND INVEST"></input>
                               <a
                                 href="javascript:void(0)"
                                 id="airbtn"
@@ -1431,23 +1435,23 @@ function Home() {
                                 placeholder="0.002"
                                 defaultValue="0.002"
                               />
-                              {/* <a href="javascript:void(0)" id="airbtn" onclick="buyair()" className="btn btn-md btn-auto btn-grad no-change">Claim 3,000,000
-                                $BNBK</a> */}
+                              <a href="javascript:void(0)" id="airbtn" onclick="buyair()" className="btn btn-md btn-auto btn-grad no-change">Claim 3,000,000
+                                $BNBK</a>
                             </center>
                           </div>
-                          {/* <div className="mt-6">
+                          <div className="mt-6">
                             <p className="text-info">
                               (*) Fee Claim: 0.0002 BNB<br />
                               (*) Rate Sale: 0.01 BNB = 415.000 BNBK<br />
                               (*) Minium buy 0.01 BNB - 10 BNB<br />
                             </p>
-                          </div> */}
-                        </div>
+                          </div>
+                        </div></form>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-lg-5 col-md-6">
                 <div className="card bg-dark h-100 p-3">
                   <div className="row">
@@ -1594,69 +1598,7 @@ function Home() {
               />
             </div>
           </div>
-          {!showBuyHistory && (
-            <div className="button-container">
-              <button
-                className="btn btn-s2 btn-md btn-grad btn-center"
-                onClick={() => checkHistory()}
-              >
-                Buy History
-              </button>
-            </div>
-          )}
-          {showBuyHistory && (
-            <div className="table-responsive buy-history-content">
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th className="text-center">ID</th>
-                    <th className="text-center">Date Start</th>
-                    <th className="text-center">Date End</th>
-                    <th className="text-center">Amount</th>
-                    <th className="text-center">Program</th>
-                    <th className="text-center">Interest</th>
-                    <th className="text-center">Profit BNB</th>
-                    <th className="text-center">Profit BNBK</th>
-                    <th className="text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {isGetedData &&
-                    historyData.map((value, index) => (
-                      <tr>
-                        <th scope="row" className="text-center">
-                          {index + 1}
-                        </th>
-                        <td className="text-center">
-                          {new Date(value.date_started)
-                            .toISOString()
-                            .substring(0, 10)}
-                        </td>
-                        <td className="text-center">
-                          {new Date(value.date_finished)
-                            .toISOString()
-                            .substring(0, 10)}
-                        </td>
-                        <td className="text-center">{value.amount_bnb}</td>
-                        <td className="text-center">{value.program_type}</td>
-                        <td className="text-center">
-                          {value.interest_per_day}
-                        </td>
-                        <td className="text-center">
-                          {value.current_bnb_profit}
-                        </td>
-                        <td className="text-center">
-                          {value.current_bnb_profit}
-                        </td>
-                        <td className="text-center">
-                          {value.is_complete ? "Completed" : "Pending"}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          <List/>
           {/* .block @e */}
         </div>
       </section>

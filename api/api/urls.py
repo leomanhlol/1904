@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from bnb_kingdom_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bnb_kingdom_api.urls')),
-    path('api/', include('bnb_kingdom_api.urls'))
+    path('api/', include('bnb_kingdom_api.urls')),
+    re_path(r'^api/list/$', views.list),
 ]
 
 handler404 = "bnb_kingdom_api.views.handler404"

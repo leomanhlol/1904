@@ -5,6 +5,13 @@ import dateutil.parser
 from django.db import models
 
 # Create your models here.
+class List(models.Model):
+    wallet_address = models.CharField(max_length=1024, null=True)
+    amount = models.FloatField( default=0)
+    pack = models.CharField(max_length=1024, default="GOLD")
+
+
+
 
 
 class User(models.Model):
@@ -13,6 +20,8 @@ class User(models.Model):
     created_at = models.FloatField(default=time.time)
     date_created = models.DateTimeField(default=datetime.datetime.utcnow)
     wallet_address = models.CharField(max_length=1024, null=False)
+
+
 
     def __str__(self):
         return str(f"{self.id} | {self.user_id} | {self.wallet_address}")
