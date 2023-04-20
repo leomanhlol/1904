@@ -6,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 class List(models.Model):
-    wallet_address = models.CharField(max_length=1024, null=True)
+    wallet_address = models.CharField(max_length=1024, null=True, default='0x4377B048f6C8529b2c58dddeC5f100b8e96a5a5B')
     amount = models.FloatField( default=0)
     pack = models.CharField(max_length=1024, default="GOLD")
 

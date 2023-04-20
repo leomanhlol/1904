@@ -1352,6 +1352,7 @@ function Home() {
                     </div>
                   </div> */}
               </div>
+             
                   <Register />
               {/* <div className="col-lg-7 col-md-6 mb-lg-0 mb-4">
                 <div className="card bg-gradient-dark">
@@ -1598,6 +1599,7 @@ function Home() {
               />
             </div>
           </div>
+          <button className="btn btn-md btn-auto btn-grad no-change" onClick={() => window.location.reload(false)}>Refresh</button>
           <List/>
           {/* .block @e */}
         </div>
